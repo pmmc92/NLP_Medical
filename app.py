@@ -7,7 +7,7 @@ def text_function(texto):
     doc=nlp(texto)
     colors = {"Estado" : "#5F9EA0", "Terapêutica" : "#00FF00","RAM" : "#FFA07A","MCDT" : "#FF00FF", "Dose" : "#696969", "Posologia" : "#E6E6FA"}
     options = {"colors" : colors}
-    html = displacy.render(docx,style="ent", options=options)
+    html = displacy.render(doc,style="ent", jupyter = False,options=options)
 	st.markdown(html, unsafe_allow_html=True)
 
 def main():
