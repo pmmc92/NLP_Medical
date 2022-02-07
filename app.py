@@ -12,11 +12,10 @@ def text_function(texto):
 
 def main():
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
-    st.title('Text Analysis using Spacy Textblob')
-    st.markdown('Type a sentence in the below text box and choose the desired option in the adjacent menu.')
-    texto = st.text_input("Enter the sentence")
+    st.title('NLP em consulta farmacêutica')
+    texto = st.text_input("Insira aqui a nota")
 
-    if st.button("teste"):
+    if st.button("Analisar"):
         return text_function(texto)
 if __name__ == "__main__":
     main()
