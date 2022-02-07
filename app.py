@@ -16,6 +16,6 @@ def main():
     texto = st.text_input("Enter the sentence")
 
     if st.button("teste"):
-        text_function(texto)
+        st.write(text_function(texto))
 if __name__ == "__main__":
     main()
