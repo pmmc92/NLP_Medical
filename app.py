@@ -2,15 +2,13 @@ import streamlit as st
 import spacy
 from spacy import displacy
 
-HTML_WRAPPER = """<div style="overflow-x: auto; border: 1px solid #e6e9ef; border-radius: 0.25rem; padding: 1rem">{}</div>"""
-
 def text_function(texto):
     nlp=spacy.load("output/model-last/")
     doc=nlp(texto)
     colors = {"Estado" : "#5F9EA0", "Terapêutica" : "#00FF00","RAM" : "#FFA07A","MCDT" : "#FF00FF", "Dose" : "#696969", "Posologia" : "#E6E6FA"}
     options = {"colors" : colors}
     html = displacy.render(docx,style="ent", options=options)
-	st.markdown(ent_html, unsafe_allow_html=True)
+	st.markdown(html, unsafe_allow_html=True)
 
 def main():
     st.set_page_config(layout='wide', initial_sidebar_state='expanded')
