@@ -9,9 +9,8 @@ def text_function(texto):
     doc=nlp(texto)
     colors = {"Estado" : "#5F9EA0", "Terapêutica" : "#00FF00","RAM" : "#FFA07A","MCDT" : "#FF00FF", "Dose" : "#696969", "Posologia" : "#E6E6FA"}
     options = {"colors" : colors}
-    html = displacy.render(docx,style="ent")
-	html = html.replace("\n\n","\n")
-	st.write(HTML_WRAPPER.format(html),unsafe_allow_html=True)
+    html = displacy.render(docx,style="ent", options=options)
+	st.markdown(ent_html, unsafe_allow_html=True)
 
 def main():
     st.set_page_config(layout='wide', initial_sidebar_state='expanded')
