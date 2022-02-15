@@ -16,6 +16,7 @@ def text_function(texto):
 ent = []
 labels = []
 def processar(x):
+    nlp = spacy.load("output/model-last/")
     doc = nlp(x)
     for entity in doc.ents:
         ent.append(entity.text)
