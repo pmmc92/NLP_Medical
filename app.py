@@ -32,10 +32,13 @@ def main():
         st.write("Ficheiro escolhido:", ficheiro.name)
         df=pd.read_excel(ficheiro)
         
-    st.header("utilizando texto livre")
+    st.header("Utilizando texto livre")
     texto = st.text_input("Insira aqui a nota")
 
     if st.button("Analisar"):
-        return text_function(texto)
+        if ficheiro is not None:
+            st.write(df)
+        else:
+            return text_function(texto)
 if __name__ == "__main__":
     main()
