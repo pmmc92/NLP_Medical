@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import plotly.express as pe
 import spacy
 from spacy import displacy
 
@@ -10,9 +12,23 @@ def text_function(texto):
     html = displacy.render(doc,style = "ent", jupyter = False,options = options)
     st.markdown(html, unsafe_allow_html = True)
 
+ent = []
+labels = []
+def processar(x):
+    doc = nlp(x)
+    for entity in doc.ents:
+        ent.append(entity.text)
+        labels.append(entity.label_)
+
 def main():
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
     st.title('NLP em consulta farmacêutica')
+    ficheiro = st.file_uploader("Faça Upload do ficheiro contendo as notas clínicas", type=["xls","xlsx"])
+    if ficheiro is not None:
+        file_data =  ficheiro.read()
+        st.write("Ficheiro escolhido:", ficheiro.name)
+        df=pd.read_excel(ficheiro)
+        
     texto = st.text_input("Insira aqui a nota")
 
     if st.button("Analisar"):
