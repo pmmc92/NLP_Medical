@@ -37,7 +37,11 @@ def main():
 
     if st.button("Analisar"):
         if ficheiro is not None:
-            st.write(df)
+            processar(ficheiro)
+            base = pd.DataFrame({"Entidade":ent,"Classificação":labels})
+            RAMS=base.loc[base.Classificação=="RAM"]
+            pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400)    
+            
         else:
             return text_function(texto)
 if __name__ == "__main__":
