@@ -41,7 +41,8 @@ def main():
             df["Nota"].apply(processar)
             base = pd.DataFrame({"Entidade":ent,"Classificação":labels})
             RAMS=base.loc[base.Classificação=="RAM"]
-            pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400)    
+            fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400)
+            fig1.show()  
             
         else:
             return text_function(texto)
