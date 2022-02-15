@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as pe
 import spacy
+import openpyxl
 from spacy import displacy
 
 def text_function(texto):
