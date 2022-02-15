@@ -24,12 +24,15 @@ def processar(x):
 def main():
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
     st.title('NLP em consulta farmacêutica')
+    
+    st.header("Utilizando um ficheiro")
     ficheiro = st.file_uploader("Faça Upload do ficheiro contendo as notas clínicas", type=["xls","xlsx"])
     if ficheiro is not None:
         file_data =  ficheiro.read()
         st.write("Ficheiro escolhido:", ficheiro.name)
         df=pd.read_excel(ficheiro)
         
+    st.header("utilizando texto livre")
     texto = st.text_input("Insira aqui a nota")
 
     if st.button("Analisar"):
