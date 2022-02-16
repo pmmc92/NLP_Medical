@@ -15,10 +15,12 @@ def text_function(texto):
 
 ent = []
 labels = []
+ID = []
 def processar(x):
     nlp = spacy.load("output/model-last/")
-    doc = nlp(x)
+    doc = nlp(x.Nota)
     for entity in doc.ents:
+        ID.append(x.ID)
         ent.append(entity.text)
         labels.append(entity.label_)
 
@@ -41,7 +43,7 @@ def main():
             st.header("Dashboard de análise")
             st.write("Foram analisados registos de **{}** doentes".format(df.ID.nunique()))
             df["Nota"].apply(processar)
-            base = pd.DataFrame({"Entidade":ent,"Classific":labels})
+            base = pd.DataFrame({"ID":ID,"Entidade":ent,"Classificação":labels})
             RAMS=base.loc[base.Classific=="RAM"]
             fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
             Tx=base.loc[base.Classific=="Terapêutica"]
@@ -56,6 +58,7 @@ def main():
             with col3:
                 st.write(fig3)
             
+            st.dataframe(base)
         else:
             return text_function(texto)
 if __name__ == "__main__":
