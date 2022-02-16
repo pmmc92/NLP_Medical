@@ -32,8 +32,8 @@ def exportar(x):
         download_dataset = Estado
     elif x == "Terapêutica":
         download_dataset = Tx
-    return ficheiro_relatorio = download_dataset.to_excel("relatorio.xlsx")
-
+    ficheiro_relatorio = download_dataset.to_excel("relatorio.xlsx")
+    return ficheiro_relatorio
 
 def main():
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
