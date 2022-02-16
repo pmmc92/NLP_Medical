@@ -73,6 +73,8 @@ def main():
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
             formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
+            exportar(formato)
+
             if st.download_button(label="Exportar",data=ficheiro_relatorio):
                 exportar(formato)
 
