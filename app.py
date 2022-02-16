@@ -43,14 +43,18 @@ def main():
             df["Nota"].apply(processar)
             base = pd.DataFrame({"Entidade":ent,"Classific":labels})
             RAMS=base.loc[base.Classific=="RAM"]
-            fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400)
+            fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
             Tx=base.loc[base.Classific=="Terapêutica"]
-            fig2=pe.pie(Tx, names=Tx.Entidade, title = "Distribuição de Terapêutica", width = 400, height = 400)
-            col1,col2 = st.columns(2)
+            fig2=pe.pie(Tx, names=Tx.Entidade, title = "Distribuição de Terapêutica", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
+            Estado=base.loc[base.Classific=="Estado"]
+            fig3=pe.pie(Tx, names=Estado.Entidade, title = "Distribuição de Estado Global", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
+            col1,col2,col3 = st.columns(3)
             with col1:
                 st.write(fig1)
             with col2:
                 st.write(fig2)
+            with col3:
+                st.write(fig3)
             
         else:
             return text_function(texto)
