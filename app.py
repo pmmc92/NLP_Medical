@@ -18,7 +18,7 @@ labels = []
 ID = []
 def processar(x):
     nlp = spacy.load("output/model-last/")
-    doc = nlp(str(x.iloc[:,1]))
+    doc = nlp(str(pd.DataFrame(x.iloc[:,1])))
     for entity in doc.ents:
         ID.append(x.iloc[:,0])
         ent.append(entity.text)
