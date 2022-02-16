@@ -46,11 +46,7 @@ def main():
             fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400)
             Tx=base.loc[base.Classificação=="Terapêutica"]
             fig2=pe.pie(Tx, names=Tx.Entidade, title = "Distribuição de Terapêutica", width = 400, height = 400)
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.plotly_chart(fig1)
-            with col2: 
-                st.plotly_chart(fig2)
+            st.plotly_chart(fig1), st.plotly_chart(fig2)
             
         else:
             return text_function(texto)
