@@ -44,7 +44,7 @@ def main():
             st.write("Foram analisados registos de **{}** doentes".format(df.ID.nunique()))
             for i in range(len(df.index)):
                 processar(df.iloc[i,:])
-            base = pd.DataFrame({"ID":ID,"Entidade":ent,"Classificação":labels})
+            base = pd.DataFrame({"ID":ID,"Entidade":ent,"Classific":labels})
             RAMS=base.loc[base.Classific=="RAM"]
             fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
             Tx=base.loc[base.Classific=="Terapêutica"]
