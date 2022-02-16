@@ -24,7 +24,7 @@ def processar(x):
         ent.append(entity.text)
         labels.append(entity.label_)
 
-download_dataset = 0
+download_dataset = []
 def exportar(x):
     if x == "RAM":
         download_dataset = RAMS
@@ -75,8 +75,7 @@ def main():
             formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
             exportar(formato)
 
-            if st.download_button(label="Exportar",data=ficheiro_relatorio):
-                exportar(formato)
+            st.download_button(label="Exportar",data=ficheiro_relatorio)
 
         else:
             return text_function(texto)
