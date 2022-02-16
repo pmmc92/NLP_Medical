@@ -59,8 +59,9 @@ def main():
             with col3:
                 st.write(fig3)
             
-            c = st.container()
-            c.dataframe(base)
+            st.dataframe(base)
+            st.subheader("Exportar relatório de análise")
+            st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
         else:
             return text_function(texto)
 if __name__ == "__main__":
