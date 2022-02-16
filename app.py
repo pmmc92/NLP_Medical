@@ -59,7 +59,8 @@ def main():
             with col3:
                 st.write(fig3)
             
-            st.dataframe(base)
+            c = st.container()
+            c.dataframe(base)
         else:
             return text_function(texto)
 if __name__ == "__main__":
