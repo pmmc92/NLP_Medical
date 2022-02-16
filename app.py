@@ -18,9 +18,9 @@ labels = []
 ID = []
 def processar(x):
     nlp = spacy.load("output/model-last/")
-    doc = nlp(str(pd.DataFrame(x.iloc[:,1])))
+    doc = nlp(x["Nota"])
     for entity in doc.ents:
-        ID.append(x.iloc[:,0])
+        ID.append(x["ID"])
         ent.append(entity.text)
         labels.append(entity.label_)
 
@@ -42,7 +42,8 @@ def main():
         if ficheiro is not None:
             st.header("Dashboard de análise")
             st.write("Foram analisados registos de **{}** doentes".format(df.ID.nunique()))
-            df["Nota"].apply(processar)
+            for i in range(len(df.index)):
+                processar(df.iloc[i,:])
             base = pd.DataFrame({"ID":ID,"Entidade":ent,"Classificação":labels})
             RAMS=base.loc[base.Classific=="RAM"]
             fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
