@@ -24,6 +24,17 @@ def processar(x):
         ent.append(entity.text)
         labels.append(entity.label_)
 
+download_dataset = 0
+def exportar(x):
+    if x == "RAM":
+        download_dataset = RAMS
+    elif x == "Estado do Doente":
+        download_dataset = Estado
+    elif x == "Terapêutica":
+        download_dataset = Tx
+    download_dataset.to_excel("relatorio.xlsx")
+
+
 def main():
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
     st.title('NLP em consulta farmacêutica')
@@ -61,7 +72,10 @@ def main():
             
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
-            st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
+            formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
+            if st.download_button(label="Exportar",data=csv):
+                exportar(formato)
+
         else:
             return text_function(texto)
 if __name__ == "__main__":
