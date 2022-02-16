@@ -30,7 +30,7 @@ def exportar(x):
         download_dataset = RAMS
     elif x == "Estado do Doente":
         download_dataset = Estado
-    elif x == "Terapêutica":
+    else:
         download_dataset = Tx
     ficheiro_relatorio = download_dataset.to_excel("relatorio.xlsx")
     return ficheiro_relatorio
