@@ -39,7 +39,7 @@ def main():
     if st.button("Analisar"):
         if ficheiro is not None:
             st.header("Dashboard de análise")
-            st.write("Foram analisados registos de {} doentes".format(df.ID.nunique()))
+            st.write("Foram analisados registos de **{}** doentes".format(df.ID.nunique()))
             df["Nota"].apply(processar)
             base = pd.DataFrame({"Entidade":ent,"Classificação":labels})
             RAMS=base.loc[base.Classificação=="RAM"]
