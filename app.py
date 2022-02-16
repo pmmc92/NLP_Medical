@@ -18,9 +18,9 @@ labels = []
 ID = []
 def processar(x):
     nlp = spacy.load("output/model-last/")
-    doc = nlp(x.Nota)
+    doc = nlp(x["Nota"])
     for entity in doc.ents:
-        ID.append(x.ID)
+        ID.append(x["ID"])
         ent.append(entity.text)
         labels.append(entity.label_)
 
