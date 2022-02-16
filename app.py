@@ -38,6 +38,8 @@ def main():
 
     if st.button("Analisar"):
         if ficheiro is not None:
+            st.header("Dashboard de análise")
+            st.metric("Nº de doentes no dataset",df.ID.nunique())
             df["Nota"].apply(processar)
             base = pd.DataFrame({"Entidade":ent,"Classificação":labels})
             RAMS=base.loc[base.Classificação=="RAM"]
