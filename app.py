@@ -32,7 +32,7 @@ def exportar(x):
         download_dataset = Estado
     elif x == "Terapêutica":
         download_dataset = Tx
-    download_dataset.to_excel("relatorio.xlsx")
+    return ficheiro_relatorio = download_dataset.to_excel("relatorio.xlsx")
 
 
 def main():
@@ -73,7 +73,7 @@ def main():
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
             formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
-            if st.download_button(label="Exportar",data=csv):
+            if st.download_button(label="Exportar",data=ficheiro_relatorio):
                 exportar(formato)
 
         else:
