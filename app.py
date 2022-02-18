@@ -51,6 +51,7 @@ def to_excel(w):
 ## App main Corpus
 
 def main():
+    st.set_page_config(page_title="Projecto AscléPHios", layout="wide")
     if 'formato' not in st.session_state:
         st.session_state['formato'] = 'RAMS'
     elif st.session_state["formato"] == "RAMS":
@@ -61,7 +62,7 @@ def main():
         st.session_state["formato"] = "Estado"
     
     st.title('NLP em consulta farmacêutica')
-    st.text("Esta é uma ferramenta que permite a identificação de parâmetros e outcomes importantes em contexto de consulta farmacêutica, utilizando um modelo de Natural Language Processing (NLP)")
+    st.caption("Esta é uma ferramenta que permite a identificação de parâmetros e outcomes importantes em contexto de consulta farmacêutica, utilizando um modelo de Natural Language Processing (NLP)")
     
     st.header("Utilizando um ficheiro")
     ficheiro = st.file_uploader("Faça Upload do ficheiro contendo as notas clínicas. O ficheiro deve ter 2 colunas: ID (Número de identificação anonimizado) e Notas (Coluna contendo as notas recolhidas)", type=["xls","xlsx"])
