@@ -4,6 +4,8 @@ import plotly.express as pe
 import spacy
 import openpyxl
 from spacy import displacy
+from io import BytesIO
+from pyxlsb import open_workbook as open_xlsb
 
 def text_function(texto):
     nlp = spacy.load("output/model-last/")
@@ -24,16 +26,17 @@ def processar(x):
         ent.append(entity.text)
         labels.append(entity.label_)
 
-def exportar(x):
-    download_dataset = []
-    if x == "RAM":
-        download_dataset = base.loc[base.Classific=="RAM"]
-    elif x == "Estado do Doente":
-        download_dataset = base.loc[base.Classific=="Estado"]
-    else:
-        download_dataset = base.loc[base.Classific=="Terapêutica"]
-    ficheiro_relatorio = download_dataset.to_excel("relatorio.xlsx")
-    return ficheiro_relatorio
+def to_excel(w):
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    w.to_excel(writer, index=False, sheet_name='Sheet1')
+    workbook = writer.book
+    worksheet = writer.sheets['Sheet1']
+    format1 = workbook.add_format({'num_format': '0.00'}) 
+    worksheet.set_column('A:A', None, format1)  
+    writer.save()
+    processed_data = output.getvalue()
+    return processed_data
 
 def main():
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
@@ -72,9 +75,8 @@ def main():
             
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
-            formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica"))
 
-            ficheiro_relatorio = base.to_excel("relatorio.xlsx")
+            ficheiro_relatorio = to_excel(base)
             st.download_button(label="Exportar",data=ficheiro_relatorio)
 
         else:
