@@ -33,7 +33,7 @@ def to_excel(w):
     w.to_excel(writer, index=False, sheet_name='Sheet1')
     workbook = writer.book
     worksheet = writer.sheets['Sheet1']
-    format1 = workbook.add_format({'num_format': '0.00'}) 
+    format1 = workbook.add_format({'num_format': '0'}) 
     worksheet.set_column('A:A', None, format1)  
     writer.save()
     processed_data = output.getvalue()
@@ -76,8 +76,15 @@ def main():
             
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
+            formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"))
+            if formato == "RAMS":
+                ficheiro_download = RAMS
+            elif formato == "Estado":
+                ficheiro_download = Estado
+            else:
+                ficheiro_download = Tx
 
-            ficheiro_relatorio = to_excel(base)
+            ficheiro_relatorio = to_excel(ficheiro_download)
             st.download_button(label="Exportar",data=ficheiro_relatorio, file_name="relatorio.xlsx")
 
         else:
