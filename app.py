@@ -6,6 +6,7 @@ import openpyxl
 from spacy import displacy
 from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
+import xlsxwriter
 
 def text_function(texto):
     nlp = spacy.load("output/model-last/")
