@@ -24,7 +24,6 @@ def processar(x):
         ent.append(entity.text)
         labels.append(entity.label_)
 
-download_dataset = []
 def exportar(x):
     download_dataset = []
     if x == "RAM":
@@ -73,7 +72,7 @@ def main():
             
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
-            formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica","Dose","Posologia","Completo"))
+            formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica"))
             exportar(formato)
 
             st.download_button(label="Exportar",data=ficheiro_relatorio)
