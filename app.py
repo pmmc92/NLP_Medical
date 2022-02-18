@@ -7,7 +7,6 @@ from spacy import displacy
 from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
 import xlsxwriter
-import SessionState
 
 def text_function(texto):
     nlp = spacy.load("output/model-last/")
@@ -41,7 +40,13 @@ def to_excel(w):
     return processed_data
 
 def main():
-    session_state = SessionState.get(formato="")
+    st.session_state
+    if st.session_state["formato"] == "RAMS":
+                st.session_state["formato"] = "RAMS"
+            elif st.session_state["formato"] == "Terapêutica":
+                st.session_state["formato"] = "Terapêutica"
+            else:
+                st.session_state["formato"] = "Estado"
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
     st.title('NLP em consulta farmacêutica')
     
@@ -78,7 +83,7 @@ def main():
             
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
-            session_state.formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"))
+            formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"),key = "formato")
             if formato == "RAMS":
                 ficheiro_download = RAMS
             elif formato == "Estado":
