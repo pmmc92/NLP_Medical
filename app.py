@@ -76,6 +76,7 @@ def main():
             
             st.dataframe(base)
             st.subheader("Exportar relatório de análise")
+            @st.cache
             formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"))
             if formato == "RAMS":
                 ficheiro_download = RAMS
