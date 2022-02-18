@@ -61,41 +61,41 @@ def main():
     st.header("Utilizando texto livre")
     texto = st.text_input("Insira aqui a nota")
 
-    if st.button("Analisar"):
-        if ficheiro is not None:
-            st.header("Dashboard de análise")
-            st.write("Foram analisados registos de **{}** doentes".format(df.ID.nunique()))
-            for i in range(len(df.index)):
-                processar(df.iloc[i,:])
-            base = pd.DataFrame({"ID":ID,"Entidade":ent,"Classific":labels})
-            RAMS=base.loc[base.Classific=="RAM"]
-            fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
-            Tx=base.loc[base.Classific=="Terapêutica"]
-            fig2=pe.pie(Tx, names=Tx.Entidade, title = "Distribuição de Terapêutica", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
-            Estado=base.loc[base.Classific=="Estado"]
-            fig3=pe.pie(Tx, names=Estado.Entidade, title = "Distribuição de Estado Global", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
-            col1,col2,col3 = st.columns(3)
-            with col1:
-                st.write(fig1)
-            with col2:
-                st.write(fig2)
-            with col3:
-                st.write(fig3)
+    
+    if ficheiro is not None:
+        st.header("Dashboard de análise")
+        st.write("Foram analisados registos de **{}** doentes".format(df.ID.nunique()))
+        for i in range(len(df.index)):
+            processar(df.iloc[i,:])
+        base = pd.DataFrame({"ID":ID,"Entidade":ent,"Classific":labels})
+        RAMS=base.loc[base.Classific=="RAM"]
+        fig1=pe.pie(RAMS, names=RAMS.Entidade, title = "Distribuição de RAMS", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
+        Tx=base.loc[base.Classific=="Terapêutica"]
+        fig2=pe.pie(Tx, names=Tx.Entidade, title = "Distribuição de Terapêutica", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
+        Estado=base.loc[base.Classific=="Estado"]
+        fig3=pe.pie(Tx, names=Estado.Entidade, title = "Distribuição de Estado Global", width = 400, height = 400, color_discrete_sequence=pe.colors.qualitative.Vivid)
+        col1,col2,col3 = st.columns(3)
+        with col1:
+            st.write(fig1)
+        with col2:
+            st.write(fig2)
+        with col3:
+            st.write(fig3)
             
-            st.dataframe(base)
-            st.subheader("Exportar relatório de análise")
-            formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"),key = "formato")
-            if formato == "RAMS":
-                ficheiro_download = RAMS
-            elif formato == "Estado":
-                ficheiro_download = Estado
-            else:
-                ficheiro_download = Tx
-            ficheiro_relatorio = to_excel(ficheiro_download)
-
+        st.dataframe(base)
+        st.subheader("Exportar relatório de análise")
+        formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"),key = "formato")
+        if formato == "RAMS":
+            ficheiro_download = RAMS
+        elif formato == "Estado":
+            ficheiro_download = Estado
         else:
-            return text_function(texto)
+            ficheiro_download = Tx
+        ficheiro_relatorio = to_excel(ficheiro_download)
+        st.download_button(label="Exportar",data=ficheiro_relatorio, file_name="relatorio.xlsx")
 
-    st.download_button(label="Exportar",data=ficheiro_relatorio, file_name="relatorio.xlsx")
+    else:
+        return text_function(texto)
+
 if __name__ == "__main__":
     main()
