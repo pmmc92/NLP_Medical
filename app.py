@@ -1,3 +1,6 @@
+
+## Packages Used
+
 import streamlit as st
 import pandas as pd
 import plotly.express as pe
@@ -8,6 +11,8 @@ from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
 import xlsxwriter
 
+## Function for rendering plain text 
+
 def text_function(texto):
     nlp = spacy.load("output/model-last/")
     doc = nlp(texto)
@@ -15,6 +20,8 @@ def text_function(texto):
     options = {"colors" : colors}
     html = displacy.render(doc,style = "ent", jupyter = False,options = options)
     st.markdown(html, unsafe_allow_html = True)
+
+## Performing NLP on excel and generating report DataFrame
 
 ent = []
 labels = []
@@ -26,6 +33,8 @@ def processar(x):
         ID.append(x["ID"])
         ent.append(entity.text)
         labels.append(entity.label_)
+
+## Converting report DataFrame to .xlsx
 
 def to_excel(w):
     output = BytesIO()
@@ -39,6 +48,8 @@ def to_excel(w):
     processed_data = output.getvalue()
     return processed_data
 
+## App main Corpus
+
 def main():
     if 'formato' not in st.session_state:
         st.session_state['formato'] = 'RAMS'
@@ -48,11 +59,12 @@ def main():
         st.session_state["formato"] = "Terapêutica"
     else:
         st.session_state["formato"] = "Estado"
-    st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
+    
     st.title('NLP em consulta farmacêutica')
+    st.text("Esta é uma ferramenta que permite a identificação de parâmetros e outcomes importantes em contexto de consulta farmacêutica, utilizando um modelo de Natural Language Processing (NLP)")
     
     st.header("Utilizando um ficheiro")
-    ficheiro = st.file_uploader("Faça Upload do ficheiro contendo as notas clínicas", type=["xls","xlsx"])
+    ficheiro = st.file_uploader("Faça Upload do ficheiro contendo as notas clínicas. O ficheiro deve ter 2 colunas: ID (Número de identificação anonimizado) e Notas (Coluna contendo as notas recolhidas)", type=["xls","xlsx"])
     if ficheiro is not None:
         file_data =  ficheiro.read()
         df=pd.read_excel(ficheiro)
@@ -83,8 +95,7 @@ def main():
             st.write(fig2)
         with col3:
             st.write(fig3)
-            
-        st.dataframe(base)
+        
         st.subheader("Exportar relatório de análise")
         formato = st.selectbox("O que quer recolher?",("RAMS","Estado","Terapêutica"),key = "formato")
         if formato == "RAMS":
