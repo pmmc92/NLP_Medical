@@ -26,6 +26,7 @@ def processar(x):
 
 download_dataset = []
 def exportar(x):
+    download_dataset = []
     if x == "RAM":
         download_dataset = RAMS
     elif x == "Estado do Doente":
