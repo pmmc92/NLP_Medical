@@ -95,7 +95,7 @@ def main():
         else:
             return text_function(texto)
 
-        ficheiro_relatorio = to_excel(ficheiro_download)
-        st.download_button(label="Exportar",data=ficheiro_relatorio, file_name="relatorio.xlsx")
+    ficheiro_relatorio = to_excel(ficheiro_download)
+    st.download_button(label="Exportar",data=ficheiro_relatorio, file_name="relatorio.xlsx")
 if __name__ == "__main__":
     main()
