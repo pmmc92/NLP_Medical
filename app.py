@@ -40,11 +40,9 @@ def to_excel(w):
     return processed_data
 
 def main():
-    st.session_state
     if 'formato' not in st.session_state:
         st.session_state['formato'] = 'RAMS'
-    st.session_state['key'] = 'value'
-    if st.session_state["formato"] == "RAMS":
+    elif st.session_state["formato"] == "RAMS":
         st.session_state["formato"] = "RAMS"
     elif st.session_state["formato"] == "Terapêutica":
         st.session_state["formato"] = "Terapêutica"
