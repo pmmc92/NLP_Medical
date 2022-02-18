@@ -78,7 +78,7 @@ def main():
             st.subheader("Exportar relatório de análise")
 
             ficheiro_relatorio = to_excel(base)
-            st.download_button(label="Exportar",data=ficheiro_relatorio)
+            st.download_button(label="Exportar",data=ficheiro_relatorio, file_name="relatorio.xlsx")
 
         else:
             return text_function(texto)
