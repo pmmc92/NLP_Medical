@@ -42,11 +42,11 @@ def to_excel(w):
 def main():
     st.session_state
     if st.session_state["formato"] == "RAMS":
-                st.session_state["formato"] = "RAMS"
-            elif st.session_state["formato"] == "Terapêutica":
-                st.session_state["formato"] = "Terapêutica"
-            else:
-                st.session_state["formato"] = "Estado"
+        st.session_state["formato"] = "RAMS"
+    elif st.session_state["formato"] == "Terapêutica":
+        st.session_state["formato"] = "Terapêutica"
+    else:
+        st.session_state["formato"] = "Estado"
     st.set_page_config(layout = 'wide', initial_sidebar_state = 'expanded')
     st.title('NLP em consulta farmacêutica')
     
