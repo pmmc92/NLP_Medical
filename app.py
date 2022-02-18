@@ -74,7 +74,8 @@ def main():
             st.subheader("Exportar relatório de análise")
             formato = st.radio("O que pretender recolher?",("RAMS","Estado do doente","Terapêutica"))
 
-            st.download_button(label="Exportar",data=base)
+            ficheiro_relatorio = base.to_excel("relatorio.xlsx")
+            st.download_button(label="Exportar",data=ficheiro_relatorio)
 
         else:
             return text_function(texto)
