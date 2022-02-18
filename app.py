@@ -55,8 +55,10 @@ def main():
     ficheiro = st.file_uploader("Faça Upload do ficheiro contendo as notas clínicas", type=["xls","xlsx"])
     if ficheiro is not None:
         file_data =  ficheiro.read()
-        st.write("Ficheiro escolhido:", ficheiro.name)
         df=pd.read_excel(ficheiro)
+        df["ID"].astype(int)
+        df["Nota"].astype(str)
+
         
     st.header("Utilizando texto livre")
     texto = st.text_input("Insira aqui a nota")
