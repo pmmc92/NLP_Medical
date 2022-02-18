@@ -27,11 +27,11 @@ def processar(x):
 def exportar(x):
     download_dataset = []
     if x == "RAM":
-        download_dataset = RAMS
+        download_dataset = base.loc[base.Classific=="RAM"]
     elif x == "Estado do Doente":
-        download_dataset = Estado
+        download_dataset = base.loc[base.Classific=="Estado"]
     else:
-        download_dataset = Tx
+        download_dataset = base.loc[base.Classific=="Terapêutica"]
     ficheiro_relatorio = download_dataset.to_excel("relatorio.xlsx")
     return ficheiro_relatorio
 
