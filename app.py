@@ -56,8 +56,8 @@ def main():
     if ficheiro is not None:
         file_data =  ficheiro.read()
         df=pd.read_excel(ficheiro)
-        df["ID"].astype(int)
-        df["Nota"].astype(str)
+        df["ID"] = df["ID"].astype(int)
+        df["Nota"] = df["Nota"].astype(str)
 
         
     st.header("Utilizando texto livre")
